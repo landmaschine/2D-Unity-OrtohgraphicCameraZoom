@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Cinemachine;
+
+public class Camzoom : MonoBehaviour
+{
+    [SerializeField] private float ScrollSpeed = 10;
+
+    public Camera ZoomCamera;
+    public int maxZoom = 22;
+    public int minZoom = 1;
+
+    private void Start()
+    {
+        ZoomCamera = Camera.main;
+    }
+
+    private void Update()
+    {
+        ZoomCamera.orthographicSize = Mathf.Clamp(
+            ZoomCamera.orthographicSize - Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed,
+            minZoom,
+            maxZoom
+        );
+    }
+}
